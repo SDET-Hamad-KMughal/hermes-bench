@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 3rem auto; background: #fff; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 4px;">
+    <h2>Sign In to your Testbed Account</h2>
+    <p style="color: #6c757d; font-size: 0.9rem;">Provide your credentials to switch agent contexts and verify account sandboxes.</p>
+    <hr style="border: 0; border-top: 1px solid #dee2e6; margin-bottom: 1.5rem;">
+
+    <form action="/login" method="POST">
+        <div style="margin-bottom: 1.25rem;">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Email Address</label>
+            <input type="email" name="email" required style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Password</label>
+            <input type="password" name="password" required style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        
+        <button type="submit" style="width: 100%; background-color: #28a745; color: white; border: none; padding: 10px; font-size: 1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">Authenticate Session</button>
+    </form>
+    
+    <div style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem;">
+        Need a new test profile? <a href="/register" style="color: #007bff; text-decoration: none;">Create an Account Here</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Storefront Inventory Catalog</h2>
+<p>Select automated targets below to interactively evaluate transactional state mutations:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product Details</th>
+            <th>Unit Price</th>
+            <th>Inventory Stock</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in products %}
+        <tr>
+            <td>
+                <strong>{{ item.name }}</strong>
+                <br><small style="color: #6c757d;">{{ item.description }}</small>
+            </td>
+            <td>${{ item.price }}</td>
+            <td>
+                {% if item.stock > 0 %}
+                    <span class="badge">{{ item.stock }} units remaining</span>
+                {% else %}
+                    <span class="badge" style="background-color: #dc3545;">Out of Stock</span>
+                {% endif %}
+            </td>
+            <td>
+                <form action="/cart" method="POST" style="margin: 0;">
+                    <input type="hidden" name="product_id" value="{{ item.id }}">
+                    <button type="submit" style="background-color: #007bff; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Add to Cart</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
