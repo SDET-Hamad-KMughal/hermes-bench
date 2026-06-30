@@ -18,8 +18,9 @@ class User(db.Model, UserMixin):
     balance = db.Column(db.Float, default=100.0)  # Starting credit for benchmarking
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Relationship to track active shopping cart state
+    # Relationship to track active shopping cart state and history
     cart_items = db.relationship('CartItem', backref='buyer', lazy=True, cascade="all, delete-orphan")
+    orders = db.relationship('Order', backref='owner', lazy=True, cascade="all, delete-orphan")
 
 class Product(db.Model):
     """Schema representing storefront items, pricing arrays, and inventory counts."""
@@ -42,5 +43,13 @@ class CartItem(db.Model):
     quantity = db.Column(db.Integer, default=1, nullable=False)
     added_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Establish single-point relation join to fetch attached object data easily
     product = db.relationship('Product')
+
+class Order(db.Model):
+    """Schema tracking finalized transaction history for audit and benchmarking."""
+    __tablename__ = 'orders'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    total_paid = db.Column(db.Float, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)

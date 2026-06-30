@@ -24,19 +24,20 @@
             <a href="/" style="font-size: 1.2rem; font-weight: 700;">HERMES-Bench</a>
         </div>
         <div>
-    <a href="/">Storefront</a>
-    <a href="/cart">Shopping Cart</a>
-    {% if current_user.is_authenticated %}
-        <span style="color: #fff; margin-right: 15px; font-weight: 600;">
-            Agent: <span style="color: #28a745;">{{ current_user.username }}</span> 
-            (Wallet: <span style="color: #ffc107;">${{ "%.2f"|format(current_user.balance) }}</span>)
-        </span>
-        <a href="/logout" style="color: #dc3545; font-weight: bold;">Logout</a>
-    {% else %}
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-    {% endif %}
-</div>
+            <a href="/">Storefront</a>
+            <a href="/cart">Shopping Cart</a>
+            {% if current_user.is_authenticated %}
+                <span style="color: #fff; margin-right: 15px; font-weight: 600;">
+                    Agent: <span style="color: #28a745;">{{ current_user.username }}</span> 
+                    (Wallet: <span style="color: #ffc107;">${{ "%.2f"|format(current_user.balance) }}</span>)
+                    <a href="/topup" style="color: #ffffff; font-size: 0.8rem; margin-left: 10px; text-decoration: underline;">[Top-Up]</a>
+                </span>
+                <a href="/logout" style="color: #dc3545; font-weight: bold;">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
+        </div>
     </nav>
 
     <div class="container">
