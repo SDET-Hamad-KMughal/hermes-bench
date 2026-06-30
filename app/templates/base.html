@@ -26,12 +26,20 @@
         <div>
             <a href="/">Storefront</a>
             <a href="/cart">Shopping Cart</a>
+            
             {% if current_user.is_authenticated %}
+                <a href="/orders">My Orders</a>
+                
                 <span style="color: #fff; margin-right: 15px; font-weight: 600;">
-                    Agent: <span style="color: #28a745;">{{ current_user.username }}</span> 
+                    Agent: <a href="/profile" style="color: #28a745; text-decoration: underline;">{{ current_user.username }}</a> 
                     (Wallet: <span style="color: #ffc107;">${{ "%.2f"|format(current_user.balance) }}</span>)
                     <a href="/topup" style="color: #ffffff; font-size: 0.8rem; margin-left: 10px; text-decoration: underline;">[Top-Up]</a>
                 </span>
+
+              {% if current_user.is_authenticated %}
+    <a href="/admin" style="color: #ffc107; font-weight: bold; border: 1px solid #ffc107; padding: 2px 5px; border-radius: 3px;">Admin Panel</a>
+{% endif %}
+
                 <a href="/logout" style="color: #dc3545; font-weight: bold;">Logout</a>
             {% else %}
                 <a href="/login">Login</a>
